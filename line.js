@@ -13,7 +13,7 @@ var tooltip3 = d3.select("#chart-3")
 
 var xScale3 = d3.scaleTime()
   .range([marginLeft3, width - margin.right])
-  .domain([new Date('January 3, 2022'), new Date('November 11, 2022')])
+  .domain([new Date('January 3, 2022'), new Date('November 14, 2022')])
 
 // Define X axis
 var xAxis3 = d3.axisBottom(xScale3)
@@ -328,8 +328,9 @@ d3.csv("data.csv")
       .attr("r", 1)
       .style('fill', '#654f6f')
 
-    dotsG3.raise()
     linesG3.raise()
+    dotsG3.raise()
+
     d3.selectAll('.line').raise()
 
     svg3.append("rect")
@@ -341,6 +342,7 @@ d3.csv("data.csv")
       .attr('pointer-events', 'all')
       .data([csv])
       .on("mouseover mousemove touchstart touchmove", function(d) {
+
         return mouseoverLine(d, 3)
       })
       .on("mouseout", () => {

@@ -59,6 +59,15 @@ function mouseoverLine(data, index) {
     .attr('r', 7)
     .raise()
 
+  dotsG3.raise()
+
+  d3.select(`#tooltip-${index}`)
+    .html(html)
+    .attr('display', 'block')
+    .style("visibility", "visible")
+    .style('top', topTT(index))
+    .style('left', leftTT(index))
+
   var changeArr = [{
     'symbol': 'mar',
     'rate': parseFloat(d.marChange)
@@ -66,7 +75,7 @@ function mouseoverLine(data, index) {
     'symbol': 'hlt',
     'rate': parseFloat(d.hltChange)
   }, {
-    'symbol': 'hlt',
+    'symbol': 'hst',
     'rate': parseFloat(d.hstChange)
   }, {
     'symbol': 'mgm',
@@ -80,19 +89,14 @@ function mouseoverLine(data, index) {
   }]
 
   changeArr.sort((a, b) => {
-    return a.rate < b.rate
+    return a.rate > b.rate
   })
+
+  console.log(changeArr[0]['symbol'])
 
   changeArr.forEach((d) => {
     d3.selectAll(`.dot.${d.symbol}`).raise()
   })
-
-  d3.select(`#tooltip-${index}`)
-    .html(html)
-    .attr('display', 'block')
-    .style("visibility", "visible")
-    .style('top', topTT(index))
-    .style('left', leftTT(index))
 
   d3.selectAll(`#tooltip-${index} .quit`)
     .on('click', () => {
